@@ -1,7 +1,7 @@
 ## A Non-Deterministic Turing Machine Simulator
 ###### Project of Algorithms and Data Structures (AY 2017/18, Politecnico di Milano)
 
-The program simply takes an input file with the definition of a Turing Machine and some input strings, and simulates the normal functioning of a Turing Machine. The definition may provide non-deterministic moves.
+The program simply takes an input file with the definition of a Turing Machine and some input strings, and simulates the normal functioning of the automaton. The definition may provide non-deterministic moves.
 The input file may be passed through the first argument from the shell. If not specified, standard input will be assumed. 
 
 Here is the format for an input file:
