@@ -1629,22 +1629,37 @@ void destroyTuringMachine(TuringMachine *this_) {
 
 int main(int argc, const char *argv[]) {
     
-    TuringMachine *tm = makeTuringMachine(stdin);
-    FileWrapper *fw = makeFileWrapper(stdin);
+    FILE *in = NULL;
+    if (argc > 1) {
+        in = fopen(argv[1], "r");
+        
+        if (!in) {
+            fprintf(stderr, "Error opening the given file.\n\n");
+            exit(1);
+        }
+    }
+    
+    if (!in) {
+        in = stdin;
+    }
+    
+    
+    TuringMachine *tm = makeTuringMachine(in);
+    FileWrapper *fw = makeFileWrapper(in);
     
     char buffer[20];
-    fgets(buffer, 20, stdin);
+    fgets(buffer, 20, in);
     
     while (!FileWrapper_eof(fw)) {
         switch (TuringMachine_startComputation(tm, fw)) {
             case AutomatonOutcomeAccept:
-                printf("1\n");
+                fprintf(stdout, "1\n");
                 break;
             case AutomatonOutcomeRefuse:
-                printf("0\n");
+                fprintf(stdout, "0\n");
                 break;
             case AutomatonOutcomeUndefined:
-                printf("U\n");
+                fprintf(stdout, "U\n");
                 break;
         }
     }
